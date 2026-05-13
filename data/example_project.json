@@ -1,0 +1,20 @@
+{
+  "name": "Solar Rural Electrification Project",
+  "country": "Ethiopia",
+  "total_budget_usd": 12000000,
+  "donor": "African Development Bank",
+  "sector": "Energy",
+  "procurement_method": "AfDB restricted ICB, donor-country vendor preference",
+  "beneficiary_count": 80000,
+  "national_law_reference": "Ethiopian Federal Procurement and Property Administration Proclamation No. 649/2009",
+  "context_notes": "AfDB conditions require 60% of equipment sourced from AfDB member states. Ethiopian law mandates local content > 40% for energy projects.",
+  "line_items": [
+    {"name": "Solar Panel Supply - Foreign Vendor", "amount_usd": 4500000, "category": "equipment", "vendor_origin": "donor_mandated"},
+    {"name": "Engineering Consultancy - International", "amount_usd": 2200000, "category": "consultancy", "vendor_origin": "foreign"},
+    {"name": "Local Installation Works", "amount_usd": 2800000, "category": "civil_works", "vendor_origin": "local"},
+    {"name": "Project Management", "amount_usd": 800000, "category": "project_management", "vendor_origin": "local"},
+    {"name": "Community Training", "amount_usd": 400000, "category": "training", "vendor_origin": "local"},
+    {"name": "Environmental & Social Safeguards", "amount_usd": 700000, "category": "administration", "vendor_origin": "foreign"},
+    {"name": "Monitoring & Evaluation", "amount_usd": 600000, "category": "administration", "vendor_origin": "donor_mandated"}
+  ]
+}

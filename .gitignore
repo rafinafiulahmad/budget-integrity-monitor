@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+*.whl
+.installed.cfg
+
+# Virtual environments
+.env
+.venv
+venv/
+env/
+ENV/
+
+# Environment variables
+.env.local
+.env.*.local
+secrets.env
+
+# Runtime data (generated at runtime, not source)
+reports/
+uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Logs
+*.log
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/

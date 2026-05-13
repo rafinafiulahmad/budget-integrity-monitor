@@ -1,0 +1,93 @@
+============================================================
+  Budget Integrity Monitor
+  LICENSE
+============================================================
+
+Copyright (c) 2025–2026  Nafiul Ahmad Rafi
+All rights reserved.
+
+Author   : Nafiul Ahmad Rafi
+Role     : Civic Tech Architect & Developer
+           AI Policy Researcher
+           Director, Insights Bangladesh
+           Lead Developer, NagorikBD
+           Founder, AtlasAii
+
+Contact  : insightsbangladesh@gmail.com
+           https://nagorikbd.org
+
+------------------------------------------------------------
+TERMS OF USE
+------------------------------------------------------------
+
+1. PERMITTED USE
+   This software is provided for use within the Budget
+   Integrity Monitor project and affiliated civic technology
+   initiatives of:
+
+     • Insights Bangladesh
+     • NagorikBD
+     • AtlasAii
+     • Partner organisations under written agreement
+
+2. ATTRIBUTION
+   Any deployment, fork, or derivative of this software must
+   retain this license notice and credit the original author:
+
+     "Budget Integrity Monitor originally developed by
+      Nafiul Ahmad Rafi (NagorikBD / Insights Bangladesh)"
+
+3. RESTRICTIONS
+   a. You may not sublicense, sell, or commercially distribute
+      this software as a standalone product without written
+      permission from the author.
+   b. You may not remove or alter copyright notices.
+   c. You may not represent this work as your own in any
+      publication, tender, or grant submission.
+
+4. MODIFICATIONS
+   Modifications for internal deployment are permitted.
+   Significant modifications intended for public release
+   must be shared back with the original author under the
+   same terms (copyleft on derivatives).
+
+5. NO WARRANTY
+   THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+   ANY KIND, EXPRESS OR IMPLIED. THE AUTHOR SHALL NOT BE
+   LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING
+   FROM THE USE OF THIS SOFTWARE.
+
+6. GOVERNING CONTEXT
+   This software was developed in the context of civic
+   technology and digital governance work in Bangladesh,
+   aligned with principles of open government, citizen
+   participation, and public accountability.
+
+------------------------------------------------------------
+THIRD-PARTY DEPENDENCIES
+------------------------------------------------------------
+
+  flask         — BSD License
+  anthropic     — MIT License
+  reportlab     — BSD License
+  matplotlib    — PSF License
+  pandas        — BSD License
+  openpyxl      — MIT License
+  python-docx   — MIT License
+  authlib       — Apache License 2.0 (optional, Google SSO)
+  requests      — Apache License 2.0
+
+------------------------------------------------------------
+VERSION HISTORY
+------------------------------------------------------------
+
+v1.0.0  (2026)  — Initial public release. Full feature set:
+                  AI leakage detection, impact analysis,
+                  sovereign alignment check, Bengali
+                  translation, multi-org auth, role-based
+                  access, password reset, invite onboarding,
+                  Google SSO, audit log, org settings,
+                  super-admin panel, CSV/PDF/Excel export,
+                  risk trends, map view, alerting.
+
+============================================================
