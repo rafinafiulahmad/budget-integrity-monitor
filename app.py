@@ -594,7 +594,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Budget Integrity Monitor</title>
+  <title>BIM · Budget Integrity Monitor</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -777,6 +777,57 @@ DASHBOARD_HTML = """<!DOCTYPE html>
     /* Map filters */
     .map-filter-row { display: flex; gap: .7rem; margin-bottom: .8rem; flex-wrap: wrap; }
     .map-filter-row select { padding: .4rem .7rem; border: 1px solid var(--border); border-radius: 6px; font-size: .85rem; background: var(--card); }
+
+    /* ── BIM visual refresh ── */
+    :root {
+      --navy: #102d3b; --navy2: #16475a; --gold: #d79a4d; --gold2: #eab66c;
+      --bg: #eef3f1; --card: #fffefa; --border: #dbe6e1;
+      --green: #2d8d68; --orange: #c9793d; --red: #c24d52; --yellow: #bf8d31;
+      --green-bg: #eaf5ee; --red-bg: #fff1f0;
+      --radius: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: radial-gradient(circle at 80% -10%, rgba(217,165,92,.13), transparent 30%), linear-gradient(135deg, #f4f7f5, #eaf1ee); color: #19313a; }
+    body::before { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .3; background-image: linear-gradient(rgba(16,45,59,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(16,45,59,.025) 1px, transparent 1px); background-size: 32px 32px; }
+    header { position: sticky; top: 0; z-index: 50; padding: .85rem clamp(1rem, 4vw, 3.5rem); background: linear-gradient(105deg, rgba(16,45,59,.98), rgba(20,73,84,.97)); border-bottom: 3px solid var(--gold); box-shadow: 0 10px 28px rgba(18,54,62,.18); backdrop-filter: blur(14px); }
+    header h1 { display: flex; align-items: center; gap: .65rem; letter-spacing: -.035em; font-size: clamp(1rem, 1.8vw, 1.3rem); }
+    .brand-mark, .login-mark { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 10px; color: var(--navy); background: linear-gradient(145deg, #efbd70, #c98237); box-shadow: 0 7px 14px rgba(0,0,0,.16); font-size: 1.2rem; }
+    .sub { margin-left: 2.65rem; opacity: .78; letter-spacing: .02em; }
+    .org-pill { background: rgba(220,169,87,.15); border-color: rgba(236,188,110,.45); }
+    .container { max-width: 1440px; margin: 0 auto; padding: 1.7rem clamp(1rem, 4vw, 3.5rem) 4rem; }
+    .tabs { position: sticky; top: 81px; z-index: 25; padding: .45rem; margin: 0 -0.45rem 1.5rem; border: 1px solid #d6e3de; border-radius: 14px; background: rgba(245,250,247,.88); box-shadow: 0 7px 21px rgba(25,63,54,.08); backdrop-filter: blur(14px); gap: .25rem; overflow-x: auto; flex-wrap: nowrap; }
+    .tab { flex: 0 0 auto; border: 0; border-radius: 10px; padding: .62rem .95rem; color: #6c7f7c; background: transparent; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+    .tab:hover { color: var(--navy); background: rgba(255,255,255,.68); }
+    .tab.active { color: #fff; background: var(--navy); border-color: var(--navy); box-shadow: 0 6px 14px rgba(16,45,59,.18); }
+    .card, .trend-card, .alert-section { border: 1px solid #dbe7e2; border-radius: var(--radius); background: rgba(255,254,250,.92); box-shadow: 0 10px 28px rgba(25,63,54,.07); }
+    .card { padding: clamp(1rem, 2.2vw, 1.65rem); }
+    label { color: #617470; font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; }
+    textarea, input[type=file], input[type=text], .form-row input[type=text], .form-row input[type=password], .form-row input[type=number], .form-row input[type=email], .trend-filter-row select { border-color: #d5e2dd; border-radius: 10px; background: #fbfdfa; color: #19313a; transition: .18s ease; }
+    textarea:focus, input:focus, select:focus { border-color: #79afa0; box-shadow: 0 0 0 3px rgba(76,143,121,.13); }
+    button { border-radius: 10px; box-shadow: 0 4px 11px rgba(16,45,59,.08); }
+    button:hover { transform: translateY(-1px); }
+    button.secondary { background: var(--gold); }
+    .risk-badge { box-shadow: 0 4px 10px rgba(16,45,59,.1); }
+    .trend-summary-bar { border-radius: var(--radius); background: linear-gradient(105deg, #102d3b, #1c5960); box-shadow: 0 13px 26px rgba(16,45,59,.16); }
+    .trend-summary-bar .ts-num { color: #f1c47b; }
+    .trend-card { transition: .2s ease; }
+    .trend-card:hover { transform: translateY(-3px); border-color: #a8c9bc; box-shadow: 0 15px 30px rgba(25,63,54,.12); }
+    #project-map { min-height: 360px; height: min(54vh, 520px); border: 0; border-radius: 13px; box-shadow: inset 0 0 0 1px #d3e1dc, 0 8px 20px rgba(24,58,51,.08); }
+    .map-legend { padding: .55rem .7rem; border-radius: 10px; background: rgba(255,254,250,.7); width: fit-content; }
+    .diff-table { border: 1px solid #dce7e2; border-radius: 10px; overflow: hidden; }
+    .diff-table th { background: var(--navy2); }
+    .diff-table td { border-color: #e2ebe7; }
+    .login-box { width: min(420px, calc(100vw - 2rem)); padding: 2.5rem 2.2rem; border: 1px solid rgba(215,154,77,.25); border-radius: 20px; background: rgba(255,254,250,.97); box-shadow: 0 25px 80px rgba(0,0,0,.3); }
+    .login-box h2 { display: flex; align-items: center; gap: .65rem; color: var(--navy); font-size: 1.35rem; }
+    .login-box p { line-height: 1.5; color: #73817d; }
+    .login-tab { border: 1px solid #d8e4df; border-radius: 9px; color: #70807b; }
+    .login-tab.active { background: var(--navy); border-color: var(--navy); box-shadow: 0 6px 13px rgba(16,45,59,.16); }
+    .lf input { border-radius: 10px; padding: .72rem .85rem; border-color: #d5e2dd; background: #fbfdfa; }
+    .lf button { padding: .78rem; border-radius: 10px; background: linear-gradient(135deg, #153f4d, #1b6770); }
+    .demo-hint { color: #83908b; background: #f0f5f2; border: 1px solid #dfeae4; }
+    .success, .error { border-radius: 10px; }
+    @media (max-width: 780px) { header { padding: .75rem 1rem; } .hdr-left { min-width: 0; } header .sub { display: none; } .hdr-right { gap: .35rem; } .org-pill { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .container { padding-top: 1rem; } .tabs { top: 68px; } .form-row { grid-template-columns: 1fr; } .trend-summary-bar { gap: 1rem; overflow-x: auto; justify-content: flex-start; } .trend-summary-bar .ts-item { min-width: 92px; } }
+    @media (max-width: 520px) { header h1 { font-size: 1rem; } .brand-mark { width: 1.75rem; height: 1.75rem; font-size: 1rem; } .hdr-right #user-label { display: none; } .logout-btn { padding: .35rem .55rem; font-size: .72rem; } .container { padding-left: .7rem; padding-right: .7rem; } .tabs { margin-left: -.2rem; margin-right: -.2rem; } .card { padding: .95rem; } .trend-grid { grid-template-columns: 1fr; } #project-map { height: 52vh; min-height: 300px; } .map-legend { gap: .65rem; } .map-legend span { font-size: .72rem; } }
   </style>
 </head>
 <body>
@@ -784,8 +835,8 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 <!-- ── Login Overlay ── -->
 <div id="login-overlay">
   <div class="login-box">
-    <h2>🏛 Budget Integrity Monitor</h2>
-    <p>Political Insights BD · Sign in to your organization workspace</p>
+    <h2><span class="login-mark">◎</span> Budget Integrity Monitor</h2>
+    <p>AI-assisted fiscal governance · Sign in to your organization workspace</p>
     <div class="login-tabs">
       <div class="login-tab active" onclick="switchAuthTab('login')">Sign In</div>
       <div class="login-tab" onclick="switchAuthTab('register')">Register</div>
@@ -819,8 +870,8 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 <header>
   <div class="hdr-left">
     <div>
-      <h1>🏛 LDC Budget Integrity Monitor</h1>
-      <div class="sub">Political Insights BD (PIBD) · AI-Powered Fiscal Governance</div>
+      <h1><span class="brand-mark">◎</span> Budget Integrity Monitor</h1>
+      <div class="sub">Political Insights BD (PIBD) · AI-assisted fiscal governance workspace</div>
     </div>
   </div>
   <div class="hdr-right">
